@@ -1,15 +1,18 @@
 'use strict';
 
 const largeImage = document.getElementById('largeImg');
-const thumbnails = document.querySelectorAll('.gallery__img');
+const gallery = document.querySelector('.gallery');
 
-thumbnails.forEach((thumbnail) => {
-  thumbnail.addEventListener('click', () => {
-    event.preventDefault(); // Запобігаємо стандартній дії посилання
+gallery.addEventListener('click', () => {
+  event.preventDefault();
 
-    const newSrc = thumbnail.src; // Отримуємо шлях до картинки
+  const target = event.target;
 
-    // Змінюємо джерело великої картинки
-    largeImage.src = newSrc;
-  });
+  if (target.tagName === 'IMG') {
+    const link = target.closest('a');
+
+    if (link) {
+      largeImage.src = link.href;
+    }
+  }
 });
